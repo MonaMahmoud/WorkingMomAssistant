@@ -6,22 +6,40 @@ const typeDefs = gql`
     username: String
     email: String
     password: String
-    thoughts: [Thought]!
+    children: [Child]
   }
 
-  type Thought {
+  type Category {
     _id: ID
-    thoughtText: String
-    thoughtAuthor: String
-    createdAt: String
-    comments: [Comment]!
+    name: String
   }
 
-  type Comment {
+  type SubCategory {
     _id: ID
-    commentText: String
-    commentAuthor: String
+    name: String
+  }
+
+  type Frequency {
+    _id: ID
+    name: String
+  }
+
+
+  type Child {
+    _id: ID
+    name: String
+    age: Int
+    mom: User
+  }
+
+  type Task {
+    _id: ID
+    taskDesc: String
+    taskEffort: Int
+    taskUser: User
     createdAt: String
+    taskLabel: Child
+    taskSubCategory: SubCategory
   }
 
   type Auth {
@@ -30,24 +48,33 @@ const typeDefs = gql`
   }
 
   type Query {
-    users: [User]
+
     user(username: String!): User
-    thoughts(username: String): [Thought]
-    thought(thoughtId: ID!): Thought
+    children(username: String!): [Children]
+    tasks(username: String!): [Tasks]
+
   }
 
   type Mutation {
+
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addThought(thoughtText: String!, thoughtAuthor: String!): Thought
-    addComment(
-      thoughtId: ID!
-      commentText: String!
-      commentAuthor: String!
-    ): Thought
-    removeThought(thoughtId: ID!): Thought
-    removeComment(thoughtId: ID!, commentId: ID!): Thought
+    
+    addSubCategory(name: String!, category: ID!): SubCategory
+
+    addChild(name: String!, age: Int!, mom:ID!): Child
+
+
+    addTask(
+      taskDesc: String!, taskUser: ID!, taskEffort: Int!, taskSubCategory: ID!, taskLabel
+      ):Task
+
+    removeTask(taskId: ID!): Task
+    
   }
 `;
+
+
+//add query to calculate balance: return type??
 
 module.exports = typeDefs;

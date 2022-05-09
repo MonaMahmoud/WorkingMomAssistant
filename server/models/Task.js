@@ -43,10 +43,7 @@ const taskSchema = new Schema({
     ref: 'SubCategory',
   },
 
-  taskCategory: {
-    type: Schema.Types.ObjectId,
-    ref: 'Category',
-  },
+  
 
   
   // comments: [

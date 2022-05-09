@@ -10,6 +10,12 @@ const subCategorySchema = new Schema({
     trim: true,
   },
 
+  category: {
+      type: Schema.Types.ObjectId,
+      ref: 'Category',
+      required: true,
+  }
+
 });
 
 const SubCategory = model('SubCategory', subCategorySchema);

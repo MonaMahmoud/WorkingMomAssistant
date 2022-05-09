@@ -1,0 +1,17 @@
+[
+    {
+        "name": "weekly"
+    },
+    {
+        "name": "daily"
+    },
+    {
+        "name": "monthly"
+    },
+    {
+        "name": "once"
+    },
+    {
+        "name": "fortnightly"
+    }
+]
