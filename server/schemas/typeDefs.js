@@ -7,6 +7,7 @@ const typeDefs = gql`
     email: String
     password: String
     children: [Child]
+    tasks: [Task]
   }
 
   type Category {
@@ -36,7 +37,7 @@ const typeDefs = gql`
     _id: ID
     taskDesc: String
     taskEffort: Int
-    taskUser: User
+    taskUser: String
     createdAt: String
     taskLabel: Child
     taskSubCategory: SubCategory
@@ -50,8 +51,12 @@ const typeDefs = gql`
   type Query {
 
     user(username: String!): User
-    children(username: String!): [Children]
-    tasks(username: String!): [Tasks]
+
+    children(username: String!): [Child]
+
+    tasks(username: String!): [Task]
+
+    allTasks: [Task]
 
   }
 
@@ -65,11 +70,11 @@ const typeDefs = gql`
     addChild(name: String!, age: Int!, mom:ID!): Child
 
 
-    addTask(
-      taskDesc: String!, taskUser: ID!, taskEffort: Int!, taskSubCategory: ID!, taskLabel
-      ):Task
+    addTask(taskDesc: String!, taskUser: ID!, taskEffort: Int!, taskSubCategory: ID!, taskLabel: String):Task
 
     removeTask(taskId: ID!): Task
+
+    removeChild(childId: ID!): Child
     
   }
 `;

@@ -15,11 +15,17 @@ const taskSchema = new Schema({
     trim: true,
   },
 
-  taskUser: {
-    type: Schema.Types.ObjectId,
+  // taskUser: {
+  //   type: Schema.Types.ObjectId,
+  //   required: true,
+  //   ref: 'User',
+  // },
+
+ taskUser: {
+    type: String,
     required: true,
-    ref: 'User',
   },
+
 
   taskEffort: {
     type: Number,

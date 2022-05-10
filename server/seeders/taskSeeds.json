@@ -1,0 +1,17 @@
+[
+  {
+    "taskDesc": "Buy weekly groceries",
+    "taskUser": "Brian Kernighan",
+    "taskEffort": 25
+  },
+  {
+    "taskDesc": "Book after school care",
+    "taskUser": "Max Kanat-Alexander",
+    "taskEffort": 25
+  },
+  {
+    "taskDesc": "Book swimming lesson session",
+    "taskUser": "Kent Beck",
+    "taskEffort": 25
+  }
+]
