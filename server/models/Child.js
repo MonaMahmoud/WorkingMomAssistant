@@ -25,9 +25,15 @@ const childSchema = new Schema({
 
   mom: 
     {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
+      type: String,
+     required: true,
     },
+
+  // mom: 
+  //   {
+  //     type: Schema.Types.ObjectId,
+  //     ref: 'User',
+  //   },
 
   //could be birthday later
 //   createdAt: {

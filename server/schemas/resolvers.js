@@ -7,15 +7,19 @@ const resolvers = {
     // users: async () => {
     //   return User.find();
     // },
-    // users: async () => {
-    //   return User.find().populate('tasks');
-    // },
+    users: async () => {
+      return User.find().populate('tasks').populate('children');
+    },
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate('tasks');
+      return User.findOne({ username }).populate('tasks').populate('children');
     },
 
     allTasks: async () => {
       return Task.find();
+    },
+
+    allChildren: async () => {
+      return Child.find();
     },
 
     tasks: async (parent, { username }) => {
@@ -23,8 +27,16 @@ const resolvers = {
       return Task.find(params).sort({ createdAt: -1 });
     },
     children: async (parent, { username }) => {
-      return User.findOne({ username: username }).children;
+      return User.findOne({ username: username }).populate('children').children;
     },
+
+    subcategories: async () => {
+      return SubCategory.find();
+    },
+
+    categories: async () => {
+      return Category.find();
+    }
   },
 
   Mutation: {
@@ -50,6 +62,25 @@ const resolvers = {
 
       return { token, user };
     },
+
+    addSubCategory: async (parent, { name, category }) => {
+      return await SubCategory.create({ name, category });
+    },
+
+    addChild: async (parent, { name, age, mom }) => {
+      //return await Child.create({ name, age, mom });
+      const child = await Child.create({  name, age, mom });
+
+      await User.findOneAndUpdate(
+        { username: mom },
+        { $addToSet: { children: child._id } }
+      );
+
+      return child;
+    },
+
+    //    addChild(name: String!, age: Int!, mom:ID!): Child
+
     // addThought: async (parent, { thoughtText, thoughtAuthor }) => {
     //   const thought = await Thought.create({ thoughtText, thoughtAuthor });
 

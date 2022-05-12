@@ -18,6 +18,7 @@ const typeDefs = gql`
   type SubCategory {
     _id: ID
     name: String
+    category: String
   }
 
   type Frequency {
@@ -30,7 +31,7 @@ const typeDefs = gql`
     _id: ID
     name: String
     age: Int
-    mom: User
+    mom: String
   }
 
   type Task {
@@ -46,17 +47,25 @@ const typeDefs = gql`
   type Auth {
     token: ID!
     user: User
-  }
+  } 
 
   type Query {
 
     user(username: String!): User
+
+    users: [User]
 
     children(username: String!): [Child]
 
     tasks(username: String!): [Task]
 
     allTasks: [Task]
+
+    allChildren: [Child]
+
+    subcategories: [SubCategory]
+
+    categories: [Category]
 
   }
 
@@ -67,7 +76,7 @@ const typeDefs = gql`
     
     addSubCategory(name: String!, category: ID!): SubCategory
 
-    addChild(name: String!, age: Int!, mom:ID!): Child
+    addChild(name: String!, age: Int!, mom:String!): Child
 
 
     addTask(taskDesc: String!, taskUser: ID!, taskEffort: Int!, taskSubCategory: ID!, taskLabel: String):Task
