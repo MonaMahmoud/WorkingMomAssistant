@@ -1,43 +1,46 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_USER = gql`
-  query user($username: String!) {
-    user(username: $username) {
-      _id
-      username
-      email
-      thoughts {
-        _id
-        thoughtText
-        createdAt
-      }
-    }
+query Query($username: String!) {
+  user(username: $username) {
+    username
+    email
+    _id
   }
+}
 `;
 
-export const QUERY_THOUGHTS = gql`
-  query getThoughts {
-    thoughts {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-    }
+export const QUERY_TASKS = gql`
+query Query($username: String!) {
+  tasks(username: $username) {
+    _id
+    taskDesc
+    taskEffort
+    taskUser
+    createdAt
+    taskLabel
+    taskSubCategory
   }
+}
 `;
 
-export const QUERY_SINGLE_THOUGHT = gql`
-  query getSingleThought($thoughtId: ID!) {
-    thought(thoughtId: $thoughtId) {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
-        createdAt
-      }
-    }
+
+export const QUERY_CHILDREN = gql`
+query Query($username: String!) {
+  children(username: $username) {
+    name
+    age
   }
+}
+`;
+
+
+export const QUERY_SUBCATEGORIES = gql`
+query Query {
+  subcategories {
+    _id
+    name
+    category
+  }
+}
 `;

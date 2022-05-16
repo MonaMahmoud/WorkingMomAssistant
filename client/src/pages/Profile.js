@@ -5,12 +5,13 @@ import React from 'react';
 //import { useQuery } from '@apollo/client';
 
 import Welcome from '../components/Welcome/index'
+import ProfileData from '../components/Profile';
 // import ThoughtList from '../components/ThoughtList';
 // import ThoughtForm from '../components/ThoughtForm';
 
 // import { QUERY_THOUGHTS } from '../utils/queries';
 
-const Home = () => {
+const Profile = () => {
   //const { loading, data } = useQuery(QUERY_THOUGHTS);
   //const thoughts = data?.thoughts || [];
 
@@ -21,11 +22,11 @@ const Home = () => {
           className="col-12 col-md-10 mb-3 p-3"
           style={{ border: '1px dotted #1a1a1a' }}
         >
-          <Welcome />
+          <ProfileData />
         </div>
       </div>
     </main>
   );
 };
 
-export default Home;
+export default Profile;

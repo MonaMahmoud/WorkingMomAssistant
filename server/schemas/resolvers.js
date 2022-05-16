@@ -11,7 +11,7 @@ const resolvers = {
       return User.find().populate('tasks').populate('children');
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate('tasks').populate('children');
+      return User.findOne({ username });
     },
 
     allTasks: async () => {
@@ -27,7 +27,7 @@ const resolvers = {
       return Task.find(params).sort({ createdAt: -1 });
     },
     children: async (parent, { username }) => {
-      return User.findOne({ username: username }).populate('children').children;
+      return Child.find({ mom: username });
     },
 
     subcategories: async () => {
@@ -77,6 +77,24 @@ const resolvers = {
       );
 
       return child;
+    },
+
+    addTask: async (parent, { taskDesc, taskUser, taskEffort, taskSubCategory, taskLabel } ) => {
+      //return await Child.create({ name, age, mom });
+      //      return await SubCategory.create({taskDesc: desc, taskUser: user, taskEffort: effort, taskLabel: label, taskSubCategory:subCat});
+
+      const task = await Task.create(
+
+        {taskDesc, taskUser, taskEffort, taskLabel, taskSubCategory}
+        
+        );
+
+      await User.findOneAndUpdate(
+        { username: taskUser },
+        { $addToSet: { tasks: task._id } }
+      );
+
+      return task;
     },
 
     //    addChild(name: String!, age: Int!, mom:ID!): Child

@@ -23,13 +23,13 @@ const taskSchema = new Schema({
 
  taskUser: {
     type: String,
-    required: true,
+   required: true,
   },
 
 
   taskEffort: {
     type: Number,
-    required: true,
+   required: true,
     validate: checkEffort,
   },
 
@@ -40,13 +40,13 @@ const taskSchema = new Schema({
   },
 
   taskLabel: {
-    type: Schema.Types.ObjectId,
-    ref: 'Child',
+    type: String,
+   required: true,
   },
 
   taskSubCategory: {
-    type: Schema.Types.ObjectId,
-    ref: 'SubCategory',
+    type: String,
+    required: true,
   },
 
   

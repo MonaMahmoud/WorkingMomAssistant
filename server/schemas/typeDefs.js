@@ -40,8 +40,8 @@ const typeDefs = gql`
     taskEffort: Int
     taskUser: String
     createdAt: String
-    taskLabel: Child
-    taskSubCategory: SubCategory
+    taskLabel: String
+    taskSubCategory: String
   }
 
   type Auth {
@@ -79,7 +79,7 @@ const typeDefs = gql`
     addChild(name: String!, age: Int!, mom:String!): Child
 
 
-    addTask(taskDesc: String!, taskUser: ID!, taskEffort: Int!, taskSubCategory: ID!, taskLabel: String):Task
+    addTask(taskDesc: String!, taskUser: String!, taskEffort: Int!, taskSubCategory: String!, taskLabel: String):Task
 
     removeTask(taskId: ID!): Task
 
