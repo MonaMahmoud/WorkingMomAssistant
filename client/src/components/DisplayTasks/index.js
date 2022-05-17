@@ -1,10 +1,10 @@
 import React from 'react';
 // Import Link component for all internal application hyperlinks
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 
 import { useParams } from 'react-router-dom';
 import Auth from '../../utils/auth';
-
+import Table from 'react-bootstrap/Table'
 
 
 import { useQuery } from '@apollo/client';
@@ -27,7 +27,7 @@ const TasksData = () => {
 
   const tasks = data?.tasks || [{ taskDesc:"dummy task" }];
 
-  console.log(tasks);
+  //console.log(tasks);
 
 
   if (Auth.loggedIn() && Auth.getProfile().data.username === username) {
@@ -38,10 +38,37 @@ const TasksData = () => {
       
       <div>
 
-        <h2 className="text-primary"> Hi {username}, Here is a list of your tasks:</h2>
+        <h2 className="m-5 text-info"> Hi {username}, here is a list of your tasks:</h2>
+
+
+        <Table striped bordered hover responsive variant='dark'>  
+        <thead>
+            <tr>  
+                <th>Desctiption</th>  
+                <th>Subcategory</th>  
+                <th>Estimated Effort</th>  
+                <th>Label</th>  
+                <th>Created At</th>  
+
+            </tr>  
+            </thead>
+
+            <tbody>
+            {tasks.map((task) => (  
+              <tr data-index={task._id}>  
+                <td>{task.taskDesc}</td>  
+                <td>{task.taskSubCategory}</td>  
+                <td>{task.taskEffort}</td>  
+                <td>{task.taskLabel}</td>  
+                <td>{task.createdAt}</td>  
+
+              </tr>  
+            ))}
+            </tbody>  
+    
+        </Table>  
   
-        {tasks.map((task) => ( <div>{task.taskDesc} {task.createdAt}</div>))}      
-        <div>So how many of these are completed? :)</div>
+        <h3 className='text-danger m-auto'>So how many of these are completed? :)</h3>
 
       </div>
       </>

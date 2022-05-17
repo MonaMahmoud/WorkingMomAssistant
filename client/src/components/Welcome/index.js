@@ -3,9 +3,9 @@ import { Typography } from '@material-ui/core';
 import React from 'react';
 import {ThemeProvider, Theme } from '../Theme.js'
 import Auth from "../../utils/auth";
-import { Link } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
-import { QUERY_CHILDREN } from '../../utils/queries';
+//import { Link } from 'react-router-dom';
+//import { useQuery } from '@apollo/client';
+//import { QUERY_CHILDREN } from '../../utils/queries';
 
 
 const Welcome = () => {
@@ -26,7 +26,6 @@ const Welcome = () => {
         
         <div>
         <h2 className="text-primary"> Hi {Auth.getProfile().data.username}, how are you doing today?</h2>
-        <div>{Auth.getProfile().data.username}</div>
         </div>
 
 

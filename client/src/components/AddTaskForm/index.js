@@ -4,10 +4,10 @@ import { useMutation } from '@apollo/client';
 import { useQuery } from '@apollo/client';
 
 
-import { ADD_CHILD } from '../../utils/mutations';
+//import { ADD_CHILD } from '../../utils/mutations';
 import { ADD_TASK } from '../../utils/mutations';
 
-import { QUERY_SUBCATEGORIES } from '../../utils/queries';
+import { QUERY_SUBCATEGORIES, QUERY_TASKS } from '../../utils/queries';
 
 import Auth from '../../utils/auth';
 
@@ -18,41 +18,42 @@ const AddTaskForm = () => {
   const [taskEffort, setTaskEffort] = useState('');
   const [taskSubCat, setTaskSubCat] = useState('');
   const [taskLabel, setTaskLabel] = useState('');
+  const [successMessage, setSucessMessage] = useState('');
+
 
  // const [childAge, setChildAge] = useState('');
  // const [characterCount, setCharacterCount] = useState(0);
 
 
-  const [addTask, { error }] = useMutation(ADD_TASK);
+ // const [addTask, { error }] = useMutation(ADD_TASK);
 
-  const { subCatData } = useQuery(QUERY_SUBCATEGORIES);
+  const { data } = useQuery(QUERY_SUBCATEGORIES);
 
-  console.log(subCatData);
+  //console.log(subCatData);
 
-  const subCats = subCatData?.subcategories || [{"name": "groceries"},{name: "kids HW"},{name: "paying bills"}];
+  const subCats = data?.subcategories || [{"name": "groceries"},{name: "kids HW"},{name: "paying bills"}];
 
-  console.log (subCats);
-  var success = "";
-
+  //console.log (subCats);
+  //var success = "";
 
   const [characterCount, setCharacterCount] = useState(0);
 
-  // const [addChild, { error }] = useMutation(ADD_CHILD, {
-  //   update(cache, { data: { addChild } }) {
-  //     try {
-  //       const { children } = cache.readQuery({ query: QUERY_CHILDREN });
-  //       if ( children ) {
-  //         cache.writeQuery({
-  //         query: QUERY_CHILDREN,
-  //         data: { children: [addChild, ...children] },
-  //       });
-  //       }
+  const [addTask, { error }] = useMutation(ADD_TASK, {
+    update(cache, { data: { addTask } }) {
+      try {
+        const { tasks } = cache.readQuery({ query: QUERY_TASKS, variables: {username: Auth.getProfile().data.username} });
+        if ( tasks ) {
+          cache.writeQuery({
+          query: QUERY_TASKS,
+          data: { tasks: [addTask, ...tasks] }, variables: {username: Auth.getProfile().data.username}
+        });
+        }
         
-  //     } catch (e) {
-  //       console.error(e);
-  //     }
-  //   },
-  // });
+      } catch (e) {
+        console.error(e);
+      }
+    },
+  });
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -76,12 +77,14 @@ const AddTaskForm = () => {
           "taskUser": Auth.getProfile().data.username,
         },
       });
-
+      
       setTaskDesc('');
       setTaskEffort(0);
       setTaskSubCat('');
       setTaskLabel('')
-      success = "A new task has been added to your profile!"
+      setSucessMessage("A new task has been added to your profile!");
+
+    //  success = "A new task has been added to your profile!"
     } catch (err) {
       console.error(err);
     }
@@ -171,8 +174,8 @@ const AddTaskForm = () => {
             )}
 
             
-              <div className="col-12 my-3 p-3">
-                { success }
+              <div className="col-12 my-3 p-3" name="successMessage">
+                { successMessage }
               </div>
             
           </form>

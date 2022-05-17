@@ -1,0 +1,30 @@
+[ 
+ {
+    "name": "Self development",
+    "category": "Work"
+  },
+  {
+    "name": "Groceries",
+    "category": "Life"
+  },
+  {
+    "name": "Paying Bills",
+    "category": "Life"
+  },
+  {
+    "name": "Job Search",
+    "category": "Work"
+  },
+  {
+    "name": "Chores",
+    "category": "Life"
+  },
+  {
+    "name": "Wellbeing",
+    "category": "Life"
+  },
+  {
+    "name": "Kids",
+    "category": "Life"
+  }
+]

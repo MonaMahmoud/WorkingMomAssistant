@@ -41,7 +41,6 @@ const taskSchema = new Schema({
 
   taskLabel: {
     type: String,
-   required: true,
   },
 
   taskSubCategory: {

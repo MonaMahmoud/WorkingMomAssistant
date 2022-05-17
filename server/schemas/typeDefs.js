@@ -49,6 +49,14 @@ const typeDefs = gql`
     user: User
   } 
 
+
+  type BalanceData {
+    workTasks: Int
+    lifeTasks: Int
+    workEffort: Int
+    lifeEffort: Int
+  }
+
   type Query {
 
     user(username: String!): User
@@ -66,6 +74,10 @@ const typeDefs = gql`
     subcategories: [SubCategory]
 
     categories: [Category]
+
+    subcategory(subCatName: String!): SubCategory
+
+    balance(username: String!): BalanceData
 
   }
 

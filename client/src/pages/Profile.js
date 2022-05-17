@@ -4,7 +4,7 @@ import React from 'react';
 
 //import { useQuery } from '@apollo/client';
 
-import Welcome from '../components/Welcome/index'
+//import Welcome from '../components/Welcome/index'
 import ProfileData from '../components/Profile';
 // import ThoughtList from '../components/ThoughtList';
 // import ThoughtForm from '../components/ThoughtForm';

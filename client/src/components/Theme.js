@@ -2,32 +2,15 @@
 
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 
-// const LinkBehavior = React.forwardRef<any, Omit<RouterLinkProps, 'to'> & { href: RouterLinkProps['to'] }>((props, ref) => {
-//   const { href, ...other } = props;
-//   // Map href (MUI) -> to (react-router)
-//   return <RouterLink ref={ref} to={href} {...other} />;
-// });
-
-// const theme = createTheme({
-//   components: {
-//     MuiLink: {
-//       defaultProps: {
-//         component: LinkBehavior,
-//       },
-//     },
-//     MuiButtonBase: {
-//       defaultProps: {
-//         LinkComponent: LinkBehavior,
-//       },
-//     },
-//   },
-// });
+import { withStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 
 
 //import { teal } from '@mui/material/colors';
 
 const Theme = createTheme({
   typography: {
+    color: "#FFFFFF",
     fontFamily: [
       'Chilanka',
       'cursive',
@@ -35,19 +18,16 @@ const Theme = createTheme({
  //   color: teal
   }
   
-//   components: {
-//     MuiLink: {
-//       defaultProps: {
-//         component: LinkBehavior,
-//       },
-//     },
-//     MuiButtonBase: {
-//       defaultProps: {
-//         LinkComponent: LinkBehavior,
-//       },
-//     },
-//   },
-  
   ,});
 
-  export { ThemeProvider, Theme };
+  const WhiteTextTypography = withStyles({
+    root: {
+      color: "#FFFFFF",
+      fontFamily: [
+        'Chilanka',
+        'cursive',
+      ]
+    }
+  })(Typography);
+
+  export { ThemeProvider, Theme, WhiteTextTypography };

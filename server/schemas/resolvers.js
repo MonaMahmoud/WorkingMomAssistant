@@ -36,7 +36,57 @@ const resolvers = {
 
     categories: async () => {
       return Category.find();
-    }
+    },
+
+    subcategory: async (parent, { subCatName }) => {
+      return SubCategory.findOne({ name: subCatName});
+    },
+
+    balance: async (parent, { username }) => {
+      console.log(username);
+      var tasks = await Task.find( { taskUser: username } );
+
+      var i;
+      var workTasks = 0;
+      var lifeTasks = 0;
+      var workEffort = 0;
+      var lifeEffort = 0;
+     // var workWins = false;
+  
+      if ( tasks ) {
+        //  console.log(tasks.length);
+          for ( i = 0; i < tasks.length; i++ ) {
+         //  console.log((await SubCategory.findOne({ name: tasks[i].taskSubCategory})).category);
+              if ( (await SubCategory.findOne({ name: tasks[i].taskSubCategory})).category == "Work" ) {
+                  workTasks++;
+                  workEffort += tasks[i].taskEffort;
+             //     console.log("inside work task");
+              }
+              else if ((await SubCategory.findOne({ name: tasks[i].taskSubCategory})).category == "Life" ) {
+                  lifeTasks++;
+                  lifeEffort += tasks[i].taskEffort;
+                //  console.log("inside life task");
+
+              } 
+          }
+  
+      }
+      // if ( (workEffort - lifeEffort) > 50 ) {
+      //   workWins = true;
+      // }
+   //   console.log(workTasks);
+      var balanceData = {
+          "workTasks": workTasks,
+          "lifeTasks": lifeTasks,
+          "workEffort": workEffort,
+          "lifeEffort": lifeEffort,
+ //         "workwins": workWins
+  }
+  
+  return balanceData;
+
+},
+
   },
 
   Mutation: {
@@ -97,40 +147,7 @@ const resolvers = {
       return task;
     },
 
-    //    addChild(name: String!, age: Int!, mom:ID!): Child
-
-    // addThought: async (parent, { thoughtText, thoughtAuthor }) => {
-    //   const thought = await Thought.create({ thoughtText, thoughtAuthor });
-
-    //   await User.findOneAndUpdate(
-    //     { username: thoughtAuthor },
-    //     { $addToSet: { thoughts: thought._id } }
-    //   );
-
-    //   return thought;
-    // },
-    // addComment: async (parent, { thoughtId, commentText, commentAuthor }) => {
-    //   return Thought.findOneAndUpdate(
-    //     { _id: thoughtId },
-    //     {
-    //       $addToSet: { comments: { commentText, commentAuthor } },
-    //     },
-    //     {
-    //       new: true,
-    //       runValidators: true,
-    //     }
-    //   );
-    // },
-    // removeThought: async (parent, { thoughtId }) => {
-    //   return Thought.findOneAndDelete({ _id: thoughtId });
-    // },
-    // removeComment: async (parent, { thoughtId, commentId }) => {
-    //   return Thought.findOneAndUpdate(
-    //     { _id: thoughtId },
-    //     { $pull: { comments: { _id: commentId } } },
-    //     { new: true }
-    //   );
-    // },
+    
   },
 };
 

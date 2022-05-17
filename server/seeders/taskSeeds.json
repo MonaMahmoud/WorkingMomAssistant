@@ -2,16 +2,55 @@
   {
     "taskDesc": "Buy weekly groceries",
     "taskUser": "Brian Kernighan",
-    "taskEffort": 25
+    "taskEffort": 25,
+    "taskSubCategory": "Groceries"
   },
   {
     "taskDesc": "Book after school care",
     "taskUser": "Max Kanat-Alexander",
-    "taskEffort": 25
+    "taskEffort": 25,
+    "taskSubCategory": "Kids"
   },
   {
     "taskDesc": "Book swimming lesson session",
     "taskUser": "Kent Beck",
-    "taskEffort": 25
+    "taskEffort": 15,
+    "taskSubCategory": "Kids"
+  },
+  {
+    "taskDesc": "Finish a course on udemy",
+    "taskUser": "Mona",
+    "taskEffort": 40,
+    "taskSubCategory": "Self development"
+  },
+  {
+    "taskDesc": "Update resume",
+    "taskUser": "Mona",
+    "taskEffort": 15,
+    "taskSubCategory": "Job Search"
+  },
+  {
+    "taskDesc": "Laudnry",
+    "taskUser": "Mona",
+    "taskEffort": 20,
+    "taskSubCategory": "Chores"
+  },
+  {
+    "taskDesc": "Buy scouts uniform",
+    "taskUser": "Mona",
+    "taskEffort": 15,
+    "taskSubCategory": "Kids"
+  },
+  {
+    "taskDesc": "Buy school uniform",
+    "taskUser": "Mona",
+    "taskEffort": 15,
+    "taskSubCategory": "Kids"
+  },
+  {
+    "taskDesc": "Work out twice weekly",
+    "taskUser": "Mona",
+    "taskEffort": 40,
+    "taskSubCategory": "Wellbeing"
   }
 ]

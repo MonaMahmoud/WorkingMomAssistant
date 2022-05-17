@@ -44,3 +44,26 @@ query Query {
   }
 }
 `;
+
+export const QUERY_SUBCATEGORY = gql`
+
+query Subcategory($subCatName: String!) {
+  subcategory(subCatName: $subCatName) {
+    _id
+    name
+    category
+  }
+}`;
+
+
+export const QUERY_BALANCE = gql`
+query GetBalance($username: String!) {
+  balance(username: $username) {
+    workTasks
+    lifeTasks
+    workEffort
+    lifeEffort
+    
+  }
+}
+`;

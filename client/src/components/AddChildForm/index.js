@@ -10,39 +10,41 @@ import Auth from '../../utils/auth';
 const AddChildForm = () => {
   const [childName, setChildName] = useState('');
   const [childAge, setChildAge] = useState('');
+  const [successMessage, setSucessMessage] = useState('');
   const [characterCount, setCharacterCount] = useState(0);
 
 
-  const [addChild, { error }] = useMutation(ADD_CHILD);
-  var success = "";
+  // const [addChild, { error }] = useMutation(ADD_CHILD);
+ //  var success = "";
 
 
-  //const [characterCount, setCharacterCount] = useState(0);
+//  const [characterCount, setCharacterCount] = useState(0);
 
-  // const [addChild, { error }] = useMutation(ADD_CHILD, {
-  //   update(cache, { data: { addChild } }) {
-  //     try {
-  //       const { children } = cache.readQuery({ query: QUERY_CHILDREN });
-  //       if ( children ) {
-  //         cache.writeQuery({
-  //         query: QUERY_CHILDREN,
-  //         data: { children: [addChild, ...children] },
-  //       });
-  //       }
+  const [addChild, { error }] = useMutation(ADD_CHILD, {
+    update(cache, { data: { addChild } }) {
+      try {
+        const { children } = cache.readQuery({ query: QUERY_CHILDREN, variables: {username: Auth.getProfile().data.username} });
+        if ( children ) {
+          cache.writeQuery({
+          query: QUERY_CHILDREN,
+          data: { children: [addChild, ...children] }, variables: {username: Auth.getProfile().data.username}
+        });
+        }
+
         
-  //     } catch (e) {
-  //       console.error(e);
-  //     }
-  //   },
-  // });
+      } catch (e) {
+        console.error(e);
+      }
+    },
+  });
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      console.log("name: "+childName);
-      console.log("age: "+childAge);
-      console.log("mom: "+Auth.getProfile().data.username);
+      // console.log("name: "+childName);
+      // console.log("age: "+childAge);
+      // console.log("mom: "+Auth.getProfile().data.username);
 
       const { data } = await addChild({
         variables: {
@@ -54,7 +56,8 @@ const AddChildForm = () => {
 
       setChildName('');
       setChildAge(0);
-      success = "A new child has been added to your profile!"
+      //success = "A new child has been added to your profile!"
+      setSucessMessage("A new child has been added to your profile!");
     } catch (err) {
       console.error(err);
     }
@@ -122,8 +125,8 @@ const AddChildForm = () => {
             )}
 
             
-              <div className="col-12 my-3 p-3">
-                { success }
+              <div className="col-12 my-3 p-3" name="successMessage">
+                { successMessage }
               </div>
             
           </form>
