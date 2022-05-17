@@ -1,14 +1,14 @@
 import React from 'react';
-// Import Link component for all internal application hyperlinks
 import { Link } from 'react-router-dom';
-
 import { useParams } from 'react-router-dom';
 import Auth from '../../utils/auth';
 import Table from 'react-bootstrap/Table'
 import { useQuery } from '@apollo/client';
 import { QUERY_CHILDREN } from '../../utils/queries';
 import {QUERY_USER} from '../../utils/queries';
-
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 
 
@@ -30,28 +30,48 @@ const ProfileData = () => {
 
 
   const user = data?.user || { username:"dummy user", email:"anyemail@domain.com"};
-  console.log(data);
   
-  // const { loading, data } = useQuery( QUERY_CHILDREN, {
-  //   variables: { username },
-  // });
-
-
   if (Auth.loggedIn() && Auth.getProfile().data.username === username) {
 
     return (
 
+      <Container>
+        <Row>
+          <Col>
+          <h2 className="text-info"> Hi {username}, how are you doing today?</h2>
+          </Col>
+          <Col sm={4}>        
+          <h5 className='text-secondary'>Username:<strong> {user.username}</strong></h5>
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={8}></Col>
+          
+        </Row>
+        <Row>
+          <Col sm={8}>
 
+          <h2 className='text-warning m-5 '>And how are your kids doing? :)</h2>
+
+          </Col>
+          <Col sm={4}>        
+          <h5 className='text-secondary'>Email: <strong>{user.email}</strong></h5>
+          </Col>
+        </Row>
+      
       
       <div>
-        <h2 className="text-primary"> Hi {username}, how are you doing today?</h2>
+        <div className='container'>
+          <div className='row'>
 
-        <div>Username: {user.username}</div>
-        <div>Email: {user.email}</div>
+        </div>
+        <div className='row'>
+          <div className='column'>
+        </div>
+        </div>
 
-        <div>So how are your kids doing? :)</div>
 
-
+        </div>
 
         <Table striped bordered hover responsive >  
         <thead>
@@ -81,7 +101,8 @@ const ProfileData = () => {
         </Link>
 
       </div>
-  
+      </Container>
+
       
   
     );

@@ -3,9 +3,8 @@ import { Typography } from '@material-ui/core';
 import React from 'react';
 import {ThemeProvider, Theme } from '../Theme.js'
 import Auth from "../../utils/auth";
-//import { Link } from 'react-router-dom';
-//import { useQuery } from '@apollo/client';
-//import { QUERY_CHILDREN } from '../../utils/queries';
+import workingmom from './workingmom.jpg'
+
 
 
 const Welcome = () => {
@@ -31,9 +30,12 @@ const Welcome = () => {
 
         </>
       ) : (
-        <p>
+        <>
+        <h3 className='text-info'>
           Please Log in or Sign up to create the life balance you need!
-        </p>
+        </h3>
+        <img src={workingmom} className="w-25 mx-auto d-block"></img>
+        </>
       )}
 
 

@@ -1,20 +1,8 @@
 import React, { useState } from 'react';
-//import { Link } from 'react-router-dom';
-//import { useMutation } from '@apollo/client';
-
-// import { ADD_THOUGHT } from '../../utils/mutations';
-// import { QUERY_THOUGHTS } from '../../utils/queries';
-
 import Auth from '../../utils/auth';
 import { useParams } from 'react-router-dom';
 import Table from 'react-bootstrap/Table'
-
-
-
-
 import { useQuery } from '@apollo/client';
-// import { QUERY_CHILDREN } from '../../utils/queries';
-// import { QUERY_USER } from '../../utils/queries';
 import { QUERY_TASKS } from '../../utils/queries';
 import { QUERY_BALANCE } from '../../utils/queries';
 
@@ -38,9 +26,6 @@ const BalanceResults = () => {
     return (
 
         <>
-
-
-      
       <div>
 
         <h2 className="m-5 text-info"> Hi {username}, here is a summary of your work-life balance:</h2>
@@ -49,7 +34,7 @@ const BalanceResults = () => {
         <Table striped bordered hover responsive variant='dark'>  
         <thead>
             <tr>  
-                <th>Work Taks</th>  
+                <th>Work Tasks</th>  
                 <th>Life Tasks</th>  
                 <th>Work Effort</th>  
                 <th>Life Effort</th>  

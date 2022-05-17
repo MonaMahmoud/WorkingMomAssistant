@@ -2,41 +2,19 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { useQuery } from '@apollo/client';
-
-
-//import { ADD_CHILD } from '../../utils/mutations';
 import { ADD_TASK } from '../../utils/mutations';
-
 import { QUERY_SUBCATEGORIES, QUERY_TASKS } from '../../utils/queries';
-
 import Auth from '../../utils/auth';
 
-//desc, user, effort, subCat, label 
 const AddTaskForm = () => {
   const [taskDesc, setTaskDesc] = useState('');
- // const [taskUser, setTaskUser] = useState('');
   const [taskEffort, setTaskEffort] = useState('');
   const [taskSubCat, setTaskSubCat] = useState('');
   const [taskLabel, setTaskLabel] = useState('');
   const [successMessage, setSucessMessage] = useState('');
-
-
- // const [childAge, setChildAge] = useState('');
- // const [characterCount, setCharacterCount] = useState(0);
-
-
- // const [addTask, { error }] = useMutation(ADD_TASK);
-
   const { data } = useQuery(QUERY_SUBCATEGORIES);
-
-  //console.log(subCatData);
-
   const subCats = data?.subcategories || [{"name": "groceries"},{name: "kids HW"},{name: "paying bills"}];
 
-  //console.log (subCats);
-  //var success = "";
-
-  const [characterCount, setCharacterCount] = useState(0);
 
   const [addTask, { error }] = useMutation(ADD_TASK, {
     update(cache, { data: { addTask } }) {
@@ -59,15 +37,7 @@ const AddTaskForm = () => {
     event.preventDefault();
 
     try {
-      // console.log("taskUser: "+taskUser);
-      // console.log("taskEffort: "+taskEffort);
-      // console.log("taskuser: "+Auth.getProfile().data.username);
-      // console.log("taskuser: "+Auth.getProfile().data.username);
-      // console.log("taskuser: "+Auth.getProfile().data.username);
-
-//desc, user, effort, subCat, label 
-//desc, user, effort, label, subCat
-
+     
       const { data } = await addTask({
         variables: {
           "taskDesc": taskDesc,
@@ -84,7 +54,6 @@ const AddTaskForm = () => {
       setTaskLabel('')
       setSucessMessage("A new task has been added to your profile!");
 
-    //  success = "A new task has been added to your profile!"
     } catch (err) {
       console.error(err);
     }
@@ -113,13 +82,7 @@ const AddTaskForm = () => {
 
       {Auth.loggedIn() ? (
         <>
-          <p
-            className={`m-0 ${
-              characterCount === 280 || error ? 'text-danger' : ''
-            }`}
-          >
-            Character Count: {characterCount}/280
-          </p>
+          
           <form
             className="flex-row justify-center justify-space-between-md align-center"
             onSubmit={handleFormSubmit}
@@ -135,8 +98,8 @@ const AddTaskForm = () => {
               ></textarea>
 
 
-              <select name="taskSubCat" onChange={handleChange}> 
-                    <option value="⬇️ Select a fruit ⬇️"> -- Select a subcategory -- </option>
+              <select name="taskSubCat" onChange={handleChange} className="form-select col-12 col-lg-9"> 
+                    <option value="⬇️ Select a subcategory ⬇️"> -- Select a subcategory -- </option>
                           {/* Mapping through each fruit object in our fruits array
                         and returning an option element with the appropriate attributes / values.
                       */}
@@ -145,9 +108,9 @@ const AddTaskForm = () => {
 
               <textarea
                 name="taskEffort"
-                placeholder="Enter the effort you estimate this task will need (between 1 and 100)"
+                placeholder="Enter the effort you estimate this task will need (a number between 1 and 100)"
                 value={taskEffort}
-                className="form-input w-25"
+                className="form-input "
                 style={{ lineHeight: '1.5', resize: 'vertical' }}
                 onChange={handleChange}
               ></textarea>
@@ -156,7 +119,7 @@ const AddTaskForm = () => {
                 name="taskLabel"
                 placeholder="Enter a label for this task (optional)"
                 value={taskLabel}
-                className="form-input w-25"
+                className="form-input "
                 style={{ lineHeight: '1.5', resize: 'vertical' }}
                 onChange={handleChange}
               ></textarea>

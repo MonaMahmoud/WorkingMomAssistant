@@ -14,11 +14,7 @@ const AddChildForm = () => {
   const [characterCount, setCharacterCount] = useState(0);
 
 
-  // const [addChild, { error }] = useMutation(ADD_CHILD);
- //  var success = "";
-
-
-//  const [characterCount, setCharacterCount] = useState(0);
+  
 
   const [addChild, { error }] = useMutation(ADD_CHILD, {
     update(cache, { data: { addChild } }) {
@@ -42,9 +38,7 @@ const AddChildForm = () => {
     event.preventDefault();
 
     try {
-      // console.log("name: "+childName);
-      // console.log("age: "+childAge);
-      // console.log("mom: "+Auth.getProfile().data.username);
+      
 
       const { data } = await addChild({
         variables: {

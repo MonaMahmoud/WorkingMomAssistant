@@ -1,15 +1,8 @@
 import React from 'react';
-// Import Link component for all internal application hyperlinks
-//import { Link } from 'react-router-dom';
-
 import { useParams } from 'react-router-dom';
 import Auth from '../../utils/auth';
 import Table from 'react-bootstrap/Table'
-
-
 import { useQuery } from '@apollo/client';
-// import { QUERY_CHILDREN } from '../../utils/queries';
-// import { QUERY_USER } from '../../utils/queries';
 import { QUERY_TASKS } from '../../utils/queries';
 
 
@@ -26,9 +19,6 @@ const TasksData = () => {
 
 
   const tasks = data?.tasks || [{ taskDesc:"dummy task" }];
-
-  //console.log(tasks);
-
 
   if (Auth.loggedIn() && Auth.getProfile().data.username === username) {
 

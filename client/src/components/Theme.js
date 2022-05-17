@@ -1,4 +1,3 @@
-//import React from 'react';
 
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 
@@ -6,7 +5,6 @@ import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 
 
-//import { teal } from '@mui/material/colors';
 
 const Theme = createTheme({
   typography: {
@@ -15,7 +13,6 @@ const Theme = createTheme({
       'Chilanka',
       'cursive',
     ].join(','),
- //   color: teal
   }
   
   ,});
